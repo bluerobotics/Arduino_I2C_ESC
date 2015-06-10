@@ -34,37 +34,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -------------------------------*/
 
+//#define TWI_FREQ 100000l // Can be changed to reduce I2C frequency
+
+#include <Wire.h>
 #include "Arduino_I2C_ESC.h"
 
 #define ESC_ADDRESS 0x29
 
 Arduino_I2C_ESC motor(ESC_ADDRESS);
 
-float voltage, current, temperature;
-int RPM;
+int signal;
 
 void setup() {
   Serial.begin(57600);
   Serial.println("Starting");
-
-  Arduino_I2C_ESC::init();
+  
+  Wire.begin();
 }
 
 void loop() {
-  int signal;
 
   if ( Serial.available() > 0 ) {
     signal = Serial.parseInt();
-    motor.set(signal);
   }
+  
+  motor.set(signal);
 
   motor.update();
 
   Serial.print("ESC: ");
-  Serial.print(motor.rpm());Serial.print("RPM\t");
-  Serial.print(motor.voltage());Serial.print("V\t");
-  Serial.print(motor.current());Serial.print("A\t");
-  Serial.print(motor.temperature());Serial.print("`C\t");
+  if(motor.isAlive()) Serial.print("OK\t\t"); 
+  else Serial.print("NA\t\t");
+  Serial.print(signal);Serial.print(" \t\t");  
+  Serial.print(motor.rpm());Serial.print(" RPM\t\t");
+  Serial.print(motor.voltage());Serial.print(" V\t\t");
+  Serial.print(motor.current());Serial.print(" A\t\t");
+  Serial.print(motor.temperature());Serial.print(" `C");
   Serial.println();
 
   delay(250); // Update at roughly 4 hz for the demo

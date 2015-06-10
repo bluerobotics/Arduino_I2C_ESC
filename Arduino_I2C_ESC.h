@@ -41,8 +41,6 @@ THE SOFTWARE.
 
 #include "Arduino.h"
 
-#define BASE_I2C_ADDR 0x29
-
 #define MAX_ESCS 16
 
 // THERMISTOR SPECIFICATIONS
@@ -57,12 +55,13 @@ THE SOFTWARE.
 
 class Arduino_I2C_ESC {
 public:
-	Arduino_I2C_ESC(uint8_t address);
-
-	static void init();
+	Arduino_I2C_ESC(uint8_t address, uint8_t poleCount = 6);
 
 	void set(int16_t throttle);
 
+	/* The update function reads new data from the ESC. If used, this function
+	 * must be called at least every 65 seconds to prevent 16-bit overflow of 
+	 * the timer keeping track of RPM. */
 	void update();
 
 	bool isAlive();
@@ -78,12 +77,10 @@ public:
 private:
 	uint8_t _address;
 	uint16_t _voltage_raw, _current_raw, _temp_raw;
-	int16_t _rpm_raw;
-
-	static uint8_t buffer[9];
-
-	static Arduino_I2C_ESC *_escs[MAX_ESCS];
-	static uint8_t _escCount;
+	int16_t _rpm;
+	uint16_t _rpmTimer;
+	uint8_t _identifier;
+	uint8_t _poleCount;
 
 	static void readBuffer(uint8_t address, uint8_t buffer[]);
 
