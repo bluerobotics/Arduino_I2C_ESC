@@ -44,8 +44,6 @@ void Arduino_I2C_ESC::update() {
   _current_raw = (_buffer[6] << 8) | _buffer[7];
   _identifier = _buffer[8];
 
-  Serial.println(_rpm);
-
   _rpm = float(_rpm)/((uint16_t(millis())-_rpmTimer)/1000.0f)*60/float(_poleCount);
   _rpmTimer = millis();
 }
