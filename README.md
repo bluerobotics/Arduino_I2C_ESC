@@ -11,7 +11,8 @@ Please see the examples for normal operation. Below are the available functions 
 	 * T200 is 7. */
 	Arduino_I2C_ESC(uint8_t address, uint8_t poleCount = 6);
 
-	/* Sends updated throttle setting for the motor. */
+	/* Sends updated throttle setting for the motor. Throttle input range is 16 bit
+	 * (-32767 to +32767). */
 	void set(int16_t throttle);
 
 	/* The update function reads new data from the ESC. If used, this function
