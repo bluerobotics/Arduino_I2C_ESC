@@ -33,6 +33,16 @@ void Arduino_I2C_ESC::set(int16_t throttle) {
   Wire.endTransmission();
 }
 
+// Send motor speed command to ESC
+void Arduino_I2C_ESC::setPWM(int16_t pwm) {  
+  int16_t throttle = map(pwm,1100,1900,-32767,32767);
+  Wire.beginTransmission(_address);
+  Wire.write(0x00);
+  Wire.write(throttle>>8);
+  Wire.write(throttle);  
+  Wire.endTransmission();
+}
+
 void Arduino_I2C_ESC::update() {  
   _buffer[8] = 0x00; // Reset last byte so we can check for alive
 

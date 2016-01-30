@@ -15,6 +15,9 @@ Please see the examples for normal operation. Below are the available functions 
 	 * (-32767 to +32767). */
 	void set(int16_t throttle);
 
+	/* Alternate function to set throttle using standard servo pulse range (1100-1900) */
+	void setPWM(int16_t pwm);
+
 	/* The update function reads new data from the ESC. If used, this function
 	 * must be called at least every 65 seconds to prevent 16-bit overflow of 
 	 * the timer keeping track of RPM. Recommended to call this function at 4-10 Hz */
