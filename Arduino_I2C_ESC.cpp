@@ -35,12 +35,7 @@ void Arduino_I2C_ESC::set(int16_t throttle) {
 
 // Send motor speed command to ESC
 void Arduino_I2C_ESC::setPWM(int16_t pwm) {  
-  int16_t throttle = map(pwm,1100,1900,-32767,32767);
-  Wire.beginTransmission(_address);
-  Wire.write(0x00);
-  Wire.write(throttle>>8);
-  Wire.write(throttle);  
-  Wire.endTransmission();
+  set(map(pwm,1100,1900,-32767,32767));
 }
 
 void Arduino_I2C_ESC::update() {  
