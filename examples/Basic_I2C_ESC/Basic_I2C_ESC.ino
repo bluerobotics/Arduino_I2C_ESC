@@ -50,6 +50,11 @@ void setup() {
   Serial.println("Starting");
   
   Wire.begin();
+
+  // Optional: Add these two lines to slow I2C clock to 12.5kHz from 100 kHz
+  // This is best for long wire lengths to minimize errors
+  TWBR = 158;  
+  TWSR |= bit (TWPS0);
 }
 
 void loop() {
