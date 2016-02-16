@@ -1,4 +1,5 @@
-# Arduino_I2C_ESC
+# Arduino_I2C_ESC [![Build Status](https://travis-ci.org/bluerobotics/Arduino_I2C_ESC.svg?branch=master)](https://travis-ci.org/bluerobotics/Arduino_I2C_ESC)
+
 I2C controlled Arduino library designed for Blue Robotics' BlueESC and other tgy compatible ESCs
 
 # Documentation
