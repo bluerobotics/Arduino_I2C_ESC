@@ -68,4 +68,5 @@ The default address (ESC 0) is 0x29 (41 in decimal). Each ESC after that (ESC 1,
 
 # Versions
 
-0.1 - Revision 1 of Arduino_I2C_ESC
+0.0.1 - Revision 1 of Arduino_I2C_ESC
+1.0.0 - First official release of Arduino Library
